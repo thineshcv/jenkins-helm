@@ -5,6 +5,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+		 checkout scm
+		 def customImage = docker.build("reactfe:${env.BUILD_ID}")
+		 customImage.push()
             }
         }
         stage('Test') {
